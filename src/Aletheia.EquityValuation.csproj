@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SecuritiesExchangeCommission.Edgar" Version="6.3.1" />
+    <PackageReference Include="TimHanewich.Toolkit" Version="3.4.0" />
+    <PackageReference Include="Xbrl" Version="5.1.1" />
+    <PackageReference Include="Yahoo.Finance" Version="4.1.2" />
+  </ItemGroup>
+
+</Project>
