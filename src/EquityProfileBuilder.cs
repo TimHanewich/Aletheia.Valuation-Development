@@ -64,7 +64,7 @@ namespace Aletheia.EquityValuation
 
             //Get the most recent 10-K
             TryUpdateStatus("Finding most recent 10-K");
-            EdgarSearchResult MostRecent10K = null;
+            EdgarSearchResult MostRecent10K = Just10Ks[0];
             foreach (EdgarSearchResult esr in Just10Ks)
             {
                 if (esr.FilingDate > MostRecent10K.FilingDate)
