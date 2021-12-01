@@ -108,6 +108,20 @@ namespace Aletheia.EquityValuation
             FinancialStatement MostRecentFS = MostRecentDoc.CreateFinancialStatement();
             TryUpdateStatus("Converting one year old instance doc to financial statement");
             FinancialStatement OneYearOldFS = OneYearOldDoc.CreateFinancialStatement();
+
+            //Fill in static data
+            ToReturn.MET_AnnualRevenue = MostRecentFS.Revenue;
+            ToReturn.MET_AnnualNetIncome = MostRecentFS.NetIncome;
+            ToReturn.MET_AnnualOperatingCashFlow = MostRecentFS.OperatingCashFlows;
+            ToReturn.MET_AnnualInvestingCashFlow = MostRecentFS.InvestingCashFlows;
+            ToReturn.MET_AnnualFinancingCashFlow = MostRecentFS.FinancingCashFlows;
+            ToReturn.MET_Assets = MostRecentFS.Assets;
+            ToReturn.MET_Equity = MostRecentFS.Equity;
+            if (MostRecentFS.Equity.HasValue && MostRecentFS.Assets.HasValue)
+            {
+                ToReturn.MET_Debt = ToReturn.MET_Assets.Value - ToReturn.MET_Equity.Value;
+            }
+            
         
 
             return ToReturn;

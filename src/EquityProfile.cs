@@ -15,16 +15,16 @@ namespace Aletheia.EquityValuation
         //Any property that is a metric (will be used in the market cap calculation/NN calculation) will be prepended with "MET_"
 
         //Static - period based (income statement, cash flow statement)
-        public long? MET_AnnualRevenue {get; set;}
-        public long? MET_AnnualNetIncome {get; set;}
-        public long? MET_AnnualOperatingCashFlow {get; set;}
-        public long? MET_AnnualInvestingCashFlow {get; set;}
-        public long? MET_AnnualFinancingCashFlow {get; set;}
+        public float? MET_AnnualRevenue {get; set;}
+        public float? MET_AnnualNetIncome {get; set;}
+        public float? MET_AnnualOperatingCashFlow {get; set;}
+        public float? MET_AnnualInvestingCashFlow {get; set;}
+        public float? MET_AnnualFinancingCashFlow {get; set;}
 
         //Static - balance sheet
-        public long? MET_Assets {get; set;}
-        public long? MET_Debt {get; set;}
-        public long? MET_Equity {get; set;}
+        public float? MET_Assets {get; set;}
+        public float? MET_Debt {get; set;}
+        public float? MET_Equity {get; set;}
 
         //Growth
         public float? MET_AnnualRevenueGrowth {get; set;}
