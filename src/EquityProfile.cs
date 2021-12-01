@@ -23,7 +23,7 @@ namespace Aletheia.EquityValuation
 
         //Static - balance sheet
         public float? MET_Assets {get; set;}
-        public float? MET_Debt {get; set;}
+        public float? MET_Liabilities {get; set;}
         public float? MET_Equity {get; set;}
 
         //Growth
@@ -37,6 +37,6 @@ namespace Aletheia.EquityValuation
         //Statistics
         public float? MET_AnnualProfitMarginPercent {get; set;}
         public float? MET_PercentEquity {get; set;}
-        public float? MET_CurrentDebtAsPercentOfCurrentAssets {get; set;}
+        public float? MET_CurrentAssetsAsPercentOfCurrentLiabilities {get; set;}
     }
 }

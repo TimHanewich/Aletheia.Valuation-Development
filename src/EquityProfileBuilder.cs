@@ -24,9 +24,12 @@ namespace Aletheia.EquityValuation
 
             //Get equity assessment
             Equity e = Equity.Create(for_symbol);
-            TryUpdateStatus("Downloading quote...");
+            TryUpdateStatus("Downloading quote summary...");
             await e.DownloadSummaryAsync();
             TryUpdateStatus("Quote downloaded.");
+            TryUpdateStatus("Downloading statistical data...");
+            await e.DownloadStatisticsAsync();
+
 
             //Plug in identifiers
             ToReturn.MarketCap = Convert.ToInt64(e.Summary.MarketCap);
@@ -117,12 +120,49 @@ namespace Aletheia.EquityValuation
             ToReturn.MET_AnnualFinancingCashFlow = MostRecentFS.FinancingCashFlows;
             ToReturn.MET_Assets = MostRecentFS.Assets;
             ToReturn.MET_Equity = MostRecentFS.Equity;
+            ToReturn.MET_Liabilities = MostRecentFS.Liabilities;
+
+            //Fill in dividend data
+            ToReturn.MET_DividendYield = e.Summary.ForwardDividendYield;
+            if (e.Statistics.DividendPayoutRatio > 0)
+            {
+                ToReturn.MET_DividendPayoutRatio = e.Statistics.DividendPayoutRatio;
+            }
+
+            //Revenue data
+            if (MostRecentFS.Revenue.HasValue && OneYearOldFS.Revenue.HasValue)
+            {
+                float RevGrowthPercent = (MostRecentFS.Revenue.Value - OneYearOldFS.Revenue.Value) / OneYearOldFS.Revenue.Value;
+                ToReturn.MET_AnnualRevenueGrowth = RevGrowthPercent;
+            }
+
+            //Net income growth
+            if (MostRecentFS.NetIncome.HasValue && OneYearOldFS.NetIncome.HasValue)
+            {
+                float NetIncomeGrowthPercent = (MostRecentFS.NetIncome.Value - OneYearOldFS.NetIncome.Value) / OneYearOldFS.NetIncome.Value;
+                ToReturn.MET_AnnualNetIncomeGrowth = NetIncomeGrowthPercent;
+            }
+
+            //Profit margin percent
+            if (MostRecentFS.NetIncome.HasValue && MostRecentFS.Revenue.HasValue)
+            {
+                float marginpercent = MostRecentFS.NetIncome.Value / MostRecentFS.Revenue.Value; 
+                ToReturn.MET_AnnualProfitMarginPercent = marginpercent;
+            }
+
+            //Percent equity
             if (MostRecentFS.Equity.HasValue && MostRecentFS.Assets.HasValue)
             {
-                ToReturn.MET_Debt = ToReturn.MET_Assets.Value - ToReturn.MET_Equity.Value;
+                float equitypercent = MostRecentFS.Equity.Value / MostRecentFS.Assets.Value;
+                ToReturn.MET_PercentEquity = equitypercent;
             }
-            
-        
+
+            //current debt as percent of current assets
+            if (MostRecentFS.CurrentAssets.HasValue && MostRecentFS.CurrentLiabilities.HasValue)
+            {
+                float val = MostRecentFS.CurrentAssets.Value / MostRecentFS.CurrentLiabilities.Value;
+                ToReturn.MET_CurrentAssetsAsPercentOfCurrentLiabilities = val;
+            }
 
             return ToReturn;
         }
