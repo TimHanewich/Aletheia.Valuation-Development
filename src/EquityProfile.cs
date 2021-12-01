@@ -6,7 +6,7 @@ namespace Aletheia.EquityValuation
     {
 
         //THE METRIC WE ARE TRYING TO MEASURE
-        public long MarketCap {get; set;}
+        public float MarketCap {get; set;}
 
         //Identifying information
         public string Symbol {get; set;}

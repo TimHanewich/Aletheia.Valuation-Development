@@ -29,10 +29,11 @@ namespace Aletheia.EquityValuation
             TryUpdateStatus("Quote downloaded.");
             TryUpdateStatus("Downloading statistical data...");
             await e.DownloadStatisticsAsync();
+            TryUpdateStatus("Statistical data donwloaded.");
 
 
             //Plug in identifiers
-            ToReturn.MarketCap = Convert.ToInt64(e.Summary.MarketCap);
+            ToReturn.MarketCap = Convert.ToSingle(e.Summary.MarketCap);
             ToReturn.Symbol = e.Summary.StockSymbol;
             ToReturn.CapturedAtUtc = DateTime.UtcNow;
 
