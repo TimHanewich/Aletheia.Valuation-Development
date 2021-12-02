@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="SecuritiesExchangeCommission.Edgar" Version="6.3.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="TimHanewich.Toolkit" Version="3.4.0" />
     <PackageReference Include="Xbrl" Version="5.1.1" />
     <PackageReference Include="Yahoo.Finance" Version="4.1.4" />
